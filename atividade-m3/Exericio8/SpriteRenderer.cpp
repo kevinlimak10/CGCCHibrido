@@ -38,18 +38,20 @@ void SpriteRenderer::DrawSprite(Texture2D& texture, glm::vec3 position, glm::vec
 
 void SpriteRenderer::initRenderData()
 {
-    // configure VAO/VBO
-    unsigned int VBO;
-    float vertices[] = {
-        // pos      // tex
-        0.0f, 1.0f, 0.0f, 1.0f,
-        1.0f, 0.0f, 1.0f, 0.0f,
-        0.0f, 0.0f, 0.0f, 0.0f,
+    GLuint VBO, EBO;
+    // faz apenas com a posição e textura
+	float vertices[] = {
+		// posicoes          // cores          // coordenadas de textura
+		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0, // superior direito
+		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // inferior direito
+		-0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // inferior esquerdo
+		-0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f,   0.0f, 1.0  // superior esquerdo
+	};
+	unsigned int indices[] = {
+	0, 1, 3, // primeiro triangulo
+	1, 2, 3  // segundo triangulo
+	};
 
-        0.0f, 1.0f, 0.0f, 1.0f,
-        1.0f, 1.0f, 1.0f, 1.0f,
-        1.0f, 0.0f, 1.0f, 0.0f
-    };
 
     glGenVertexArrays(1, &this->quadVAO);
     glGenBuffers(1, &VBO);
@@ -57,9 +59,20 @@ void SpriteRenderer::initRenderData()
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
     glBindVertexArray(this->quadVAO);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
+
+    // position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    // color attribute
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+    // texture coord attribute
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+    glEnableVertexAttribArray(2);
+    glBindVertexArray(0); //desvincula
 }
