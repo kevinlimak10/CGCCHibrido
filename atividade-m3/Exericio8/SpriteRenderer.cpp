@@ -1,4 +1,5 @@
 #include "SpriteRenderer.h"
+#include <vector>
 
 
 SpriteRenderer::SpriteRenderer(Shader& shader)
@@ -12,7 +13,7 @@ SpriteRenderer::~SpriteRenderer()
     glDeleteVertexArrays(1, &this->quadVAO);
 }
 
-void SpriteRenderer::DrawSprite(Texture2D& texture, glm::vec3 position, glm::vec2 size, glm::vec3 color)
+void SpriteRenderer::DrawSprite(Texture2D& texture, glm::vec3 position, glm::vec2 size, glm::vec3 color, std::vector<float> vertices)
 {
 
     this->shader.Use();
@@ -38,7 +39,7 @@ void SpriteRenderer::DrawSprite(Texture2D& texture, glm::vec3 position, glm::vec
 
 void SpriteRenderer::initRenderData()
 {
-    GLuint VBO, EBO;
+    GLuint VBO;
     // faz apenas com a posição e textura
 	float vertices[] = {
 		// posicoes          // cores          // coordenadas de textura
@@ -59,8 +60,8 @@ void SpriteRenderer::initRenderData()
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    //glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     glBindVertexArray(this->quadVAO);
     glEnableVertexAttribArray(0);
@@ -74,5 +75,9 @@ void SpriteRenderer::initRenderData()
     // texture coord attribute
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
     glEnableVertexAttribArray(2);
+
+    // Observe que isso é permitido, a chamada para glVertexAttribPointer registrou o VBO como o objeto de buffer de vértice 
+    // atualmente vinculado - para que depois possamos desvincular com segurança
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0); //desvincula
 }

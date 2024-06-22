@@ -7,6 +7,7 @@
 
 #include "Texture2d.h"
 #include "shader.h"
+#include "Vertice.cpp"
 
 
 class SpriteRenderer
@@ -17,7 +18,7 @@ public:
     // Destructor
     ~SpriteRenderer();
     // Renders a defined quad textured with given sprite
-    void DrawSprite(Texture2D& texture, glm::vec3 position, glm::vec2 size = glm::vec2(10.0f, 10.0f), glm::vec3 color = glm::vec3(1.0f));
+    void DrawSprite(Texture2D& texture, glm::vec3 position, glm::vec2 size = glm::vec2(10.0f, 10.0f), glm::vec3 color = glm::vec3(1.0f), std::vector<Vertice> vertices);
 private:
 
     Shader       shader;

@@ -90,6 +90,7 @@ Shader ResourceManager::loadShaderFromFile(const char* vShaderFile, const char* 
 
 Texture2D ResourceManager::loadTextureFromFile(const char* file, bool alpha)
 {
+
     // create texture object
     Texture2D texture;
     if (alpha)
@@ -105,4 +106,10 @@ Texture2D ResourceManager::loadTextureFromFile(const char* file, bool alpha)
     // and finally free image data
     stbi_image_free(data);
     return texture;
+}
+
+Texture2D ResourceManager::LoadTexture(const char* file, bool alpha, std::string name)
+{
+    Textures[name] = loadTextureFromFile(file, alpha);
+    return Textures[name];
 }
