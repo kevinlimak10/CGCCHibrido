@@ -5,8 +5,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "Texture2d.h"
-#include "shader.h"
+#include "Texture3D.h"
+#include "Shader.h"
 #include "Vertice.cpp"
 
 
@@ -18,7 +18,7 @@ public:
     // Destructor
     ~SpriteRenderer();
     // Renders a defined quad textured with given sprite
-    void DrawSprite(Texture2D& texture, glm::vec3 position, glm::vec2 size = glm::vec2(10.0f, 10.0f), glm::vec3 color = glm::vec3(1.0f), std::vector<Vertice> vertices);
+    void DrawSprite(Texture3D& texture, glm::vec3 position, glm::vec2 size = glm::vec2(10.0f, 10.0f), glm::vec3 color = glm::vec3(1.0f), std::vector<Vertice> vertices);
 private:
 
     Shader       shader;

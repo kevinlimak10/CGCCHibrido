@@ -34,7 +34,7 @@ void Application::Init() {
     Renderer = new SpriteRenderer(myShader);
 
     // Carrega texturas.
-    ResourceManager::LoadTexture("textures/fundo_mar.png", false, "background");
+    ResourceManager::LoadTexture("textures/SuzanneTriTextured.obj", false, "background");
 
     glm::vec3 playerPos = glm::vec3(10.0f, 1.5f, 1.0f);
     Player = new Object(playerPos, PLAYER_SIZE, ResourceManager::GetTexture("life"));

@@ -2,7 +2,7 @@
 #define OBJECT_INTERFACE_H
 #include <glm/glm.hpp>
 
-#include "Texture2D.h"
+#include "Texture3D.h"
 class SpriteRenderer;
 
 class ObjectInterface

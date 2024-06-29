@@ -11,7 +11,7 @@
 // Instantiate static variables
 std::map<std::string, Texture3D>    ResourceManager::Textures;
 std::map<std::string, Shader>       ResourceManager::Shaders;
-
+std::map<std::string, Object>       ResourceManager::Objects;
 
 Shader ResourceManager::LoadShader(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile, std::string name)
 {
@@ -24,9 +24,9 @@ Shader ResourceManager::GetShader(std::string name)
     return Shaders[name];
 }
 
-Texture3D ResourceManager::LoadTexture(const char* file, bool alpha, std::string name)
+Texture3D ResourceManager::LoadTexture(const char* file, std::string name)
 {
-    Textures[name] = loadTextureFromFile(file, alpha);
+    Textures[name] = loadTextureFromFile(file);
     return Textures[name];
 }
 
@@ -89,28 +89,46 @@ Shader ResourceManager::loadShaderFromFile(const char* vShaderFile, const char* 
     return shader;
 }
 
-Texture3D ResourceManager::loadTextureFromFile(const char* file, bool alpha)
+Texture3D ResourceManager::loadTextureFromFile(const char* file)
 {
 
     // create texture object
     Texture3D texture;
-    if (alpha)
-    {
-        texture.Internal_Format = GL_RGBA;
-        texture.Image_Format = GL_RGBA;
-    }
     // load image
     int width, height, nrChannels;
     unsigned char* data = stbi_load(file, &width, &height, &nrChannels, 0);
     // now generate texture
-    texture.Generate(width, height, data);
+    texture.Generate(width, height, data, nrChannels);
     // and finally free image data
     stbi_image_free(data);
     return texture;
 }
 
-Texture3D ResourceManager::LoadTexture(const char* file, bool alpha, std::string name)
+Object ResourceManager::loadObjectFromFile(const char* file)
 {
-    Textures[name] = loadTextureFromFile(file, alpha);
+
+    // create texture object
+    Texture3D texture;
+    // load image
+    int width, height, nrChannels;
+    unsigned char* data = stbi_load(file, &width, &height, &nrChannels, 0);
+    // now generate texture
+    texture.Generate(width, height, data, nrChannels);
+    // and finally free image data
+    stbi_image_free(data);
+    return texture;
+}
+
+Texture3D ResourceManager::LoadTexture(const char* file, std::string name)
+{
+    Textures[name] = loadTextureFromFile(file);
+    return Textures[name];
+}
+
+Object LoadObject(const char* file, std::string name) {
+
+};
+Object getObject(std::string name) {
+    Objects[name] = loadTextureFromFile(file);
     return Textures[name];
 }

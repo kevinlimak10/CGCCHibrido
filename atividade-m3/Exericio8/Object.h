@@ -18,7 +18,7 @@ public:
     Texture3D texture;
     Material material;
 
-    Object(glm::vec3 position, glm::vec2 size, Texture3D sprite, glm::vec3 color = glm::vec3(1.0f), glm::vec2 velocity = glm::vec2(0.0f, 0.0f), std::vector<Vertice> vertices);
+    Object(glm::vec3 position, Texture3D sprite, glm::vec3 color = glm::vec3(1.0f), glm::vec2 velocity = glm::vec2(0.0f, 0.0f), std::vector<Vertice> vertices);
 
 
     Object(); 
