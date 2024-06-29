@@ -1,36 +1,24 @@
-#pragma once
+#ifndef TEXTURE_H
+#define TEXTURE_H
+
+#include <glad/glad.h>
 #include <vector>
-#include "Texture2D.h"
-#include <string>
 #include "Vertice.cpp"
 #include "CoordenadaTextura.cpp"
 #include "Face.cpp"
-#include <iostream>
-#include <assert.h>
-#include <fstream>
-#include <sstream>
 
-
+// Texture2D is able to store and configure a texture in OpenGL.
+// It also hosts utility functions for easy management.
 class Texture3D
 {
 public:
-    std::vector<Texture2D> Textures;
-    std::vector<Vertice> Vertices;
-    std::vector<CoordenadaTextura> CoordsTextura;
-    std::vector<Face> Faces;
+	unsigned int ID;
+	std::vector<Vertice> Vertices;
+	std::vector<CoordenadaTextura> coordsTextura;
+	std::vector<Face> faces;
 
-    // Constructor
-    Texture3D(const std::vector<Texture2D>& textures,
-        const std::vector<Vertice>& vertices,
-        const std::vector<CoordenadaTextura>& coordsTextura,
-        const std::vector<Face>& faces)
-        : Textures(textures),
-        Vertices(vertices),
-        CoordsTextura(coordsTextura),
-        Faces(faces)
-    {}
-    // constructor (sets default texture modes)
-    Texture3D();
-
-    Texture3D parseArquivoTexture3D(const std::string& nomeArquivo);
+	Generate(unsigned char* data, int width, int height, int nrChannels)
 };
+
+#endif
+#pragma once

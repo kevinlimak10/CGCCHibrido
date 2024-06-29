@@ -6,9 +6,10 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "StbImage.h"
+#include "Texture3D.h"
 
 // Instantiate static variables
-std::map<std::string, Texture2D>    ResourceManager::Textures;
+std::map<std::string, Texture3D>    ResourceManager::Textures;
 std::map<std::string, Shader>       ResourceManager::Shaders;
 
 
@@ -23,13 +24,13 @@ Shader ResourceManager::GetShader(std::string name)
     return Shaders[name];
 }
 
-Texture2D ResourceManager::LoadTexture(const char* file, bool alpha, std::string name)
+Texture3D ResourceManager::LoadTexture(const char* file, bool alpha, std::string name)
 {
     Textures[name] = loadTextureFromFile(file, alpha);
     return Textures[name];
 }
 
-Texture2D ResourceManager::GetTexture(std::string name)
+Texture3D ResourceManager::GetTexture(std::string name)
 {
     return Textures[name];
 }
@@ -88,11 +89,11 @@ Shader ResourceManager::loadShaderFromFile(const char* vShaderFile, const char* 
     return shader;
 }
 
-Texture2D ResourceManager::loadTextureFromFile(const char* file, bool alpha)
+Texture3D ResourceManager::loadTextureFromFile(const char* file, bool alpha)
 {
 
     // create texture object
-    Texture2D texture;
+    Texture3D texture;
     if (alpha)
     {
         texture.Internal_Format = GL_RGBA;
@@ -108,7 +109,7 @@ Texture2D ResourceManager::loadTextureFromFile(const char* file, bool alpha)
     return texture;
 }
 
-Texture2D ResourceManager::LoadTexture(const char* file, bool alpha, std::string name)
+Texture3D ResourceManager::LoadTexture(const char* file, bool alpha, std::string name)
 {
     Textures[name] = loadTextureFromFile(file, alpha);
     return Textures[name];

@@ -150,13 +150,14 @@
   <ItemGroup>
     <ClCompile Include="..\glad.c" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Material.h" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="Shader.h" />
-    <ClCompile Include="Texture2D.cpp" />
+    <ClCompile Include="Texture3D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -166,7 +167,7 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="StbImage.h" />
-    <ClInclude Include="Texture2D.h" />
+    <ClInclude Include="Texture3D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
